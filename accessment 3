@@ -1,0 +1,35 @@
+#Programming Assignment 3
+#R Programming
+#EMAKO TIENTCHEU Aubert
+outcome <- read.csv("data/outcome-of-care-measures.csv", colClasses = "character")
+head(outcome)
+
+str(outcome[,c(2,7,11,17,19,23)])
+summary(outcome[,c(2,7, 11,17,19,23)])
+#30-day mortality rates plot for heart attack 
+outcome[, 11] <- as.numeric(outcome[, 11])
+## You may get a warning about NAs being introduced; that is okay
+hist(outcome[, 11])
+source("best.R")
+best("SC", "heart attack")
+best("NY", "pneumonia")
+best("AK", "pneumonia")
+rankhospital("NC", "heart attack", "worst")
+rankhospital("WA", "heart attack", 7)
+rankhospital("TX", "pneumonia", 10)
+rankhospital("NY", "heart attack", 7)
+r <- rankall("heart attack", 4)
+as.character(subset(r, state == "HI")$hospital)
+r <- rankall("pneumonia", "worst")
+as.character(subset(r, state == "NJ")$hospital)
+r <- rankall("heart failure", 10)
+as.character(subset(r, state == "NV")$hospital)
+
+
+
+
+
+
+
+
+
